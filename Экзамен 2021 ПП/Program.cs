@@ -63,6 +63,7 @@ namespace Экзамен_2021_ПП
             var path = dijkstra.FindShortestPath("1", "7");
             Console.WriteLine(path);
             Debug.WriteLine("ввод данных о вершинах");
+            Debug.Assert(false, "Произошла ошибка");
         }
     }
     public class gvi1
@@ -114,6 +115,7 @@ namespace Экзамен_2021_ПП
             Console.WriteLine("{0},{1}", v1, v2);
             Debug.WriteLine("Вывод вершин");
             // вывод вершин графа
+            Debug.Assert(false, "Произошла ошибка");
         }
         
     }
@@ -184,6 +186,8 @@ namespace Экзамен_2021_ПП
 
             }
             Debug.WriteLine("Вывод начала и конца пути");
+            Debug.Assert(false, "Произошла ошибка");
+            Debug.Assert(true, "Всё верно");
             return GetPath(startVertex, finishVertex);
         }
         void SetSumToNextVertex(gvi1 info)
@@ -201,6 +205,7 @@ namespace Экзамен_2021_ПП
                 }//подсчёт суммы значений путей графа
             }
             Debug.WriteLine("Вывод и подсчёт суммы");
+            Debug.Assert(false, "Произошла ошибка");
             //вывод суммы значений на путях графа
         }
         public string GetPath(gv startVertex, gv endVertex)
@@ -337,6 +342,7 @@ namespace Экзамен_2021_ПП
 
             excelApp.Quit();
             Debug.WriteLine("запись в файл Excel");
+            Debug.Assert(false, "Произошла ошибка");
         }
     }
 }
