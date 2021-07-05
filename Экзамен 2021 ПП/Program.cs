@@ -109,6 +109,49 @@ namespace Экзамен_2021_ПП
 
             return null;
         }
+        public void AddEdge(string firstName, string secondName, int weight)
+        {
+            var v1 = FindVertex(firstName);
+            var v2 = FindVertex(secondName);
+            if (v2 != null && v1 != null)
+            {
+                v1.AddEdge(v2, weight);
+                v2.AddEdge(v1, weight);
+            }
+            Console.WriteLine("{0},{1}", v1, v2);
+        }
     }
 
+    public class D
+    {
+        g g;
+        List<gvi1> infos;
+        public D(g graph)
+        {
+            this.g = graph;
+        }
+        void InitInfo()
+        {
+            infos = new List<gvi1>();
+            foreach (var v in g.Vertices)
+            {
+                infos.Add(new gvi1(v));
+            }
+        }
+        gvi1 GetVertexInfo(gv v)
+        {
+            foreach (var i in infos)
+            {
+                if (i.v.Equals(v))
+                {
+                    return i;
+                }
+            }
+
+            return null;
+        }
+
+    }
 }
+
+
