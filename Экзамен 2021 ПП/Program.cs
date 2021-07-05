@@ -150,6 +150,45 @@ namespace Экзамен_2021_ПП
 
             return null;
         }
+        public gvi1 FindUnvisitedVertexWithMinSum()
+        {
+            var maxValue = int.MinValue;
+            gvi1 maxVertexInfo = null;
+            foreach (var i in infos)
+            {
+                if (i.IU && i.ews > maxValue)
+                {
+                    maxVertexInfo = i;
+                    maxValue = i.ews;
+                }
+            }
+            return maxVertexInfo;
+        }
+        public string FindShortestPath(string startName, string finishName)
+        {
+            Console.WriteLine("Начало пути: {0}", startName);
+            Console.WriteLine("Конец пути: {0}", finishName);
+            return FindShortestPath(g.FindVertex(startName), g.FindVertex(finishName));
+        }
+        public string FindShortestPath(gv startVertex, gv finishVertex)
+        {
+            InitInfo();
+            var first = GetVertexInfo(startVertex);
+            first.ews = 0;
+            while (true)
+            {
+                var current = FindUnvisitedVertexWithMinSum();
+                if (current == null)
+                {
+                    break;
+                }
+
+                SetSumToNextVertex(current);
+
+            }
+
+            return GetPath(startVertex, finishVertex);
+        }
 
     }
 }
