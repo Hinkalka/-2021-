@@ -8,7 +8,7 @@ using System.Diagnostics;
 using Microsoft.Office.Interop.Excel;
 namespace Экзамен_2021_ПП
 {
-    class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -21,18 +21,6 @@ namespace Экзамен_2021_ПП
                     Console.WriteLine("Выбран 1 лист. Подождите минуту.");
                     listname = "Лист1";
                     break;
-                case "2":
-                    Console.WriteLine("Выбран 2 лист. Подождите минуту.");
-                    listname = "Лист2";
-                    break;
-                case "3":
-                    Console.WriteLine("Выбран 3 лист. Подождите минуту.");
-                    listname = "Лист3";
-                    break;
-                case "4":
-                    Console.WriteLine("Выбран 4 лист. Подождите минуту.");
-                    listname = "Лист4";
-                    break;
                 default:
                     Console.WriteLine("Такого листа нет.");
                     break;
@@ -44,7 +32,7 @@ namespace Экзамен_2021_ПП
         static int column = 0;
         double[,] table = Excel.GetArray(filename, listname, out column);
         double sum = 0;
-        
+        //выбор листа пользователем в файле Excel
     }
     public class konec
     {
