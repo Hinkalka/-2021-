@@ -43,4 +43,34 @@ namespace Экзамен_2021_ПП
         double sum = 0;
 
     }
+    public class konec
+    {
+        public void k()
+        {
+            var g = new g();
+
+            //добавление вершин
+            g.AddVertex("1");
+            g.AddVertex("2");
+            g.AddVertex("3");
+            g.AddVertex("4");
+            g.AddVertex("5");
+
+
+            //добавление ребер
+            g.AddEdge("1", "2", 3);
+            g.AddEdge("1", "3", 7);
+            g.AddEdge("1", "4", 1);
+            g.AddEdge("2", "4", 8);
+            g.AddEdge("3", "4", 9);
+            g.AddEdge("4", "5", 12);
+
+            Console.WriteLine(g);
+            var dijkstra = new D(g);
+            var path = dijkstra.FindShortestPath("1", "5");
+            Console.WriteLine(path);
+
+        }
+    }
+
 }
