@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using Microsoft.Office.Interop.Excel;
-
 namespace Экзамен_2021_ПП
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            
         izm7: string listname = string.Empty;
             Console.WriteLine("Какой лист хотите выбрать? ");
             switch (Console.ReadLine())
@@ -36,12 +37,14 @@ namespace Экзамен_2021_ПП
                     Console.WriteLine("Такого листа нет.");
                     break;
             }
+            Debug.WriteLine("Выбор между листами файла Excel");
         }
-        string filename = @"C:\Users\1\Downloads\komivoyazher.xlsx";
-        int column = 0;
+        static string listname = string.Empty;
+        static string filename = @"C:\Users\1\Downloads\komivoyazher.xlsx";
+        static int column = 0;
         double[,] table = Excel.GetArray(filename, listname, out column);
         double sum = 0;
-
+        
     }
     public class konec
     {
@@ -55,21 +58,23 @@ namespace Экзамен_2021_ПП
             g.AddVertex("3");
             g.AddVertex("4");
             g.AddVertex("5");
-
-
+            g.AddVertex("6");
+            g.AddVertex("7");
             //добавление ребер
             g.AddEdge("1", "2", 3);
             g.AddEdge("1", "3", 7);
             g.AddEdge("1", "4", 1);
             g.AddEdge("2", "4", 8);
             g.AddEdge("3", "4", 9);
-            g.AddEdge("4", "5", 12);
-
+            g.AddEdge("4", "5", 4);
+            g.AddEdge("4", "6", 2);
+            g.AddEdge("5", "6", 6);
+            g.AddEdge("6", "7", 3);
             Console.WriteLine(g);
             var dijkstra = new D(g);
-            var path = dijkstra.FindShortestPath("1", "5");
+            var path = dijkstra.FindShortestPath("1", "7");
             Console.WriteLine(path);
-
+            Debug.WriteLine("ввод данных о вершинах");
         }
     }
     public class gvi1
@@ -119,7 +124,10 @@ namespace Экзамен_2021_ПП
                 v2.AddEdge(v1, weight);
             }
             Console.WriteLine("{0},{1}", v1, v2);
+            Debug.WriteLine("Вывод вершин");
+            // вывод вершин графа
         }
+        
     }
 
     public class D
@@ -169,6 +177,7 @@ namespace Экзамен_2021_ПП
             Console.WriteLine("Начало пути: {0}", startName);
             Console.WriteLine("Конец пути: {0}", finishName);
             return FindShortestPath(g.FindVertex(startName), g.FindVertex(finishName));
+            // вывод нача и конца путей графа
         }
         public string FindShortestPath(gv startVertex, gv finishVertex)
         {
@@ -186,7 +195,7 @@ namespace Экзамен_2021_ПП
                 SetSumToNextVertex(current);
 
             }
-
+            Debug.WriteLine("Вывод начала и конца пути");
             return GetPath(startVertex, finishVertex);
         }
         void SetSumToNextVertex(gvi1 info)
@@ -201,9 +210,10 @@ namespace Экзамен_2021_ПП
                     nextInfo.ews = sum;
                     nextInfo.pv = info.v;
                     Console.WriteLine("Сумма после добавления предыдущего временного промежутка: {0}", sum);
-                }
+                }//подсчёт суммы значений путей графа
             }
-
+            Debug.WriteLine("Вывод и подсчёт суммы");
+            //вывод суммы значений на путях графа
         }
         public string GetPath(gv startVertex, gv endVertex)
         {
@@ -212,7 +222,7 @@ namespace Экзамен_2021_ПП
             {
                 endVertex = GetVertexInfo(endVertex).pv;
                 path = "Номер вершины:" + endVertex.ToString() + "; " + path;
-            }
+            }//вывод вершин
             return path;
         }
         void fl(string p)
@@ -238,7 +248,7 @@ namespace Экзамен_2021_ПП
                     t = sr.ReadLine();
                 }
                 sr.Close();
-            }
+            }// чтение из файла
         }
     }
     public class ge
@@ -253,6 +263,7 @@ namespace Экзамен_2021_ПП
             ConnectedVertex = connectedVertex;
             EdgeWeight = weight;
             Console.WriteLine("Затраты времени на ребре графа: {0}", weight);
+            // введение информация о затратах времени на ребре графа
         }
     }
     public class gv
@@ -314,6 +325,7 @@ namespace Экзамен_2021_ПП
             xlWB.Close(false); // закрываем книгу
             xlApp.Quit(); // закрываем Excel
             return table;
+            
         }
         public static void ExportToExcel(string filename, string listname, double sum)
         {
@@ -336,7 +348,7 @@ namespace Экзамен_2021_ПП
             xlSht.SaveAs(string.Format(@"C:\Users\1\Downloads\komivoyazher.xlsx", Environment.CurrentDirectory));
 
             excelApp.Quit();
-
+            Debug.WriteLine("запись в файл Excel");
         }
     }
 }
