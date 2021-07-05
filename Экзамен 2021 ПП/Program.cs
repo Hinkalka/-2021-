@@ -72,5 +72,43 @@ namespace Экзамен_2021_ПП
 
         }
     }
+    public class gvi1
+    {
+        public gv v { get; set; }
+        public bool IU { get; set; }
+        public int ews { get; set; }
+        public gv pv { get; set; }
+        public gvi1(gv v)
+        {
+            this.v = v;
+            IU = true;
+            ews = int.MinValue;
+            pv = null;
+        }
+    }
+    public class g
+    {
+        public List<gv> Vertices { get; }
+        public g()
+        {
+            Vertices = new List<gv>();
+        }
+        public void AddVertex(string vertexName)
+        {
+            Vertices.Add(new gv(vertexName));
+        }
+        public gv FindVertex(string vertexName)
+        {
+            foreach (var v in Vertices)
+            {
+                if (v.Name.Equals(vertexName))
+                {
+                    return v;
+                }
+            }
+
+            return null;
+        }
+    }
 
 }
