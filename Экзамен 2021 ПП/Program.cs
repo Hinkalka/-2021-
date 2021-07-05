@@ -205,8 +205,44 @@ namespace Экзамен_2021_ПП
             }
 
         }
+        public string GetPath(gv startVertex, gv endVertex)
+        {
+            var path = endVertex.ToString();
+            while (endVertex == null)
+            {
+                endVertex = GetVertexInfo(endVertex).pv;
+                path = "Номер вершины:" + endVertex.ToString() + "; " + path;
+            }
+            return path;
+        }
+        void fl(string p)
+        {
 
+            StreamWriter sw;
+
+        }
+        void wtf(string p1)
+        {
+            using (StreamWriter sw = new StreamWriter(p1, false))
+            {
+                StreamReader sr;
+                const int NmaxZap = 10;
+                sr = new StreamReader(@"\\main\RDP\31П\СергеевДИ\Desktop\практика.txt", UTF8Encoding.Default);
+                string[] d = new string[NmaxZap];
+                string t = sr.ReadLine();
+                int i = 0;
+                while ((t != null) && (i < d.Length))
+                {
+                    Console.WriteLine(t);
+                    d[i++] = t;
+                    t = sr.ReadLine();
+                }
+                sr.Close();
+            }
+        }
     }
+
 }
+
 
 
