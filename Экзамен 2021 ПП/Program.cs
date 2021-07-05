@@ -189,6 +189,22 @@ namespace Экзамен_2021_ПП
 
             return GetPath(startVertex, finishVertex);
         }
+        void SetSumToNextVertex(gvi1 info)
+        {
+            info.IU = false;
+            foreach (var e in info.v.Edges)
+            {
+                var nextInfo = GetVertexInfo(e.ConnectedVertex);
+                var sum = info.ews + e.EdgeWeight;
+                if (sum > nextInfo.ews)
+                {
+                    nextInfo.ews = sum;
+                    nextInfo.pv = info.v;
+                    Console.WriteLine("Сумма после добавления предыдущего временного промежутка: {0}", sum);
+                }
+            }
+
+        }
 
     }
 }
