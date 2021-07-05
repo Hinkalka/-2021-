@@ -241,6 +241,20 @@ namespace Экзамен_2021_ПП
             }
         }
     }
+    public class ge
+    {
+        public gv ConnectedVertex { get; }
+        public int EdgeWeight
+        {
+            get;
+        }
+        public ge(gv connectedVertex, int weight)
+        {
+            ConnectedVertex = connectedVertex;
+            EdgeWeight = weight;
+            Console.WriteLine("Затраты времени на ребре графа: {0}", weight);
+        }
+    }
 
 }
 
