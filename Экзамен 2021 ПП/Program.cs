@@ -255,7 +255,90 @@ namespace Экзамен_2021_ПП
             Console.WriteLine("Затраты времени на ребре графа: {0}", weight);
         }
     }
+    public class gv
+    {
+        public string Name { get; }
+        public List<ge> Edges { get; }
+        public gv(string vertexName)
+        {
+            Name = vertexName;
+            Edges = new List<ge>();
+        }
+        public void AddEdge(ge newEdge)
+        {
+            Edges.Add(newEdge);
+        }
+        public void AddEdge(gv vertex, int edgeWeight)
+        {
+            AddEdge(new ge(vertex, edgeWeight));
+        }
+        public override string ToString() => Name;
+    }
+    public class Excel
+    {
+        public static double[,] GetArray(string filename, string listname, out int column)
+        {
+            Application xlApp = new Application(); //Excel
+            Workbook xlWB; //рабочая книга
+            Worksheet xlSht; //лист Excel
+            column = 0;
+            xlWB = xlApp.Workbooks.Open(filename); //название файла Excel
+            xlSht = (Worksheet)xlWB.Worksheets[listname]; //название листа или 1-й лист в книге xlSht = xlWB.Worksheets[1];
 
+            int iLastRow = xlSht.Cells[xlSht.Rows.Count, "C"].End[XlDirection.xlUp].Row; //последняя заполненная строка в столбце А
+            object[,] arrData = (object[,])xlSht.Range["B3:Z" + iLastRow].Value; //берём значения из диапазона в массив
+            for (var i = 1; i <= iLastRow - 2; i++)
+            {
+                for (var j = 1; j < arrData.GetLength(1); j++)
+                {
+                    if (arrData[i, j] == null)
+                        continue;
+                    column++;
+                }
+                break;
+            }
+            double[,] table = new double[iLastRow - 2,
+            column];
+            for (var i = 1; i <= iLastRow - 2; i++)
+            {
+                for (var j = 1; j <= column; j++)
+                {
+                    table[i - 1, j - 1] =
+
+                    Convert.ToDouble(arrData[i, j]);
+                    Console.Write("\t " + table[i - 1, j - 1]);
+                }
+                Console.Write("\n");
+            }
+
+            xlWB.Close(false); // закрываем книгу
+            xlApp.Quit(); // закрываем Excel
+            return table;
+        }
+        public static void ExportToExcel(string filename, string listname, double sum)
+        {
+            // Загрузить Excel, затем создать новую пустую рабочую книгу
+            Application excelApp = new Application();
+
+            // Сделать приложение Excel видимым
+            excelApp.Visible = true;
+            Workbook xlWB; //рабочая книга
+            Worksheet xlSht; //лист Excel
+
+            xlWB = excelApp.Workbooks.Open(filename, XlUpdateLinks.xlUpdateLinksNever, false); //название файла Excel
+            xlSht = (Worksheet)xlWB.Worksheets[listname];
+
+            // Установить заголовки столбцов в ячейках
+            xlSht.Cells[11, "A"] = "Кратчайший путь= ";
+            xlSht.Cells[11, "B"] = sum + 15;
+
+            excelApp.DisplayAlerts = false;
+            xlSht.SaveAs(string.Format(@"C:\Users\1\Downloads\komivoyazher.xlsx", Environment.CurrentDirectory));
+
+            excelApp.Quit();
+
+        }
+    }
 }
 
 
